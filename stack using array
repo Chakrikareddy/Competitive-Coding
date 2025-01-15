@@ -1,0 +1,110 @@
+  #include<iostream>
+  using namespace std;
+
+  class Stack{
+    private:
+    int size;
+    int top;
+    int *S;
+
+    public:
+    Stack(int size);
+    ~Stack();
+    void push(int x);
+    int pop();
+    int peek(int index);
+    int isFull();
+    int isEmpty();
+    void display();
+    int stacktop();
+  };
+
+     Stack::Stack(int size){
+     this->size=size;
+     top=-1;
+     S=new int[size];
+   }
+   Stack::~Stack(){
+   delete[]S;
+   }
+   void Stack::push(int x){
+   if(isfull()){
+   cout<<"Stack overflow!"<<endl;
+   }else{
+   top++;
+   S[top]=x;
+   }
+   }
+   int Stack::pop(){
+   int x=1;
+   if(isempty()){
+   cout<<"Stack underflow!"<<endl;
+   }else{
+   x=S[top];
+   top--;
+   }
+   return x;
+   }
+   int Stack::peek(int index){
+   int x=-1;
+   if(top-index+1<0 || top-index+1==size){
+   cout<<"invalid position!" <<endl;
+   }else{
+   x=S[top-index+1];
+   }
+   return x;
+   }
+   int Stack::isfull(){
+   if(top==size-1){
+   return 1;
+   }
+   return 0;
+   }
+   int Stack::isempty(){
+   if(top==-1){
+   return 1;
+   }
+   return 0;
+   }
+   void Stack::display(){
+   for(int i=top;i>=0;i--){
+   cout<<S[i]<<" | "<<flush;
+   }
+   cout<<endl;
+   }
+   int Stack::stacktop(){
+   if(isempty()){
+   return -1;
+   }
+   return S[top];
+   }
+
+   int main(){
+   int A[]={1,3,5,7,9};
+   Stack stk(sizeof(A)/sizeof(A[0]));
+   for(int i=0;i<sizeof(A)/sizeof(A[0]);i++){
+   stk.push(A[i]);
+   }
+   stk.push(11);
+   cout<<"Stack full:" <<stk.isfull()<<endl;
+
+   cout<<"Stack:"<<flush;
+   stk.display();
+
+   cout<<"peek at 0th:" <<stk.peek(0)<<endl;
+   cout<<"peek at 3rd:" <<stk.peek(3)<<endl;
+   cout<<"peek at 10th:" <<stk.peek(10)<<endl;
+
+   cout<<"top element:"<<stk.stacktop()<<endl;
+
+   cout<<"popped out elements:"<<flush;
+   for(int i=0;i<sizeof(A)/sizeof(A[0]);i++){
+   cout<<stk.pop()<< ","<<flush;
+   }
+   cout<<endl;
+   stk.pop();
+
+   cout<<"Stack empty:"<<stk.isempty()<<endl;
+
+   return 0;
+   }
